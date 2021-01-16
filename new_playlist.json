@@ -1,7 +1,15 @@
 {
-  "user_id": "3",
-  "song_ids": [
-    "5",
-    "9"
+  "user": {
+    "name": "Kim Malcom"
+  },
+  "songs": [
+    {
+      "artist": "Taylor Swift",
+      "title": "This is me trying"
+    },
+    {
+      "artist": "Lake Street Dive",
+      "title": "Mistakes"
+    }
   ]
 }
