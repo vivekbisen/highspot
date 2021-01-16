@@ -11,7 +11,6 @@ class Mixtape
 
   def users_hash
     users_hash = {}
-    # return users_hash unless users_hash.empty?
     @user_store.each do |user_param|
       users_hash[user_param["id"]] = User.new(user_param)
     end
@@ -20,7 +19,6 @@ class Mixtape
 
   def songs_hash
     songs_hash = {}
-    # return songs_hash unless songs_hash.empty?
     @song_store.each do |song_param|
       songs_hash[song_param["id"]] = Song.new(song_param)
     end
