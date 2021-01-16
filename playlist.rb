@@ -7,10 +7,6 @@ class Playlist
     @songs = params["songs"].to_a
   end
 
-  def add_songs(songs)
-    @songs.push(*songs)
-  end
-
   def to_h
     {
       "id" => id,

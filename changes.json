@@ -1,0 +1,22 @@
+{
+  "new_playlist": {
+    "user": {
+      "name": "Kim Malcom"
+    },
+    "songs": [
+      {
+        "artist": "Taylor Swift",
+        "title": "This is me trying"
+      },
+      {
+        "artist": "Lake Street Dive",
+        "title": "Mistakes"
+      }
+    ]
+  },
+  "remove_playlists": ["1", "3"],
+  "add_song_to_playlist": {
+    "playlist_id": "2",
+    "song_id": "16"
+  }
+}

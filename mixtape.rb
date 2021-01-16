@@ -44,8 +44,9 @@ class Mixtape
     playlists_hash.values
   end
 
-  def add_playlist(new_playlist_input_file)
-    new_playlist_hash = read_file(new_playlist_input_file)
+  def add_playlist(changes_file)
+    new_playlist_hash = read_file(changes_file)["new_playlist"]
+    return if new_playlist_hash.empty?
     user = User.new(
       "id" => new_id(users_hash),
       "name" => new_playlist_hash["user"]["name"]
@@ -69,6 +70,21 @@ class Mixtape
     )
 
     @playlist_store.push(playlist.to_h)
+  end
+
+  def remove_playlists(changes_file)
+    playlist_ids = read_file(changes_file)["remove_playlists"]
+    return if playlist_ids.empty?
+    @playlist_store.delete_if { |playlist| playlist_ids.include?(playlist["id"]) }
+  end
+
+  def add_existing_song_to_existing_playlist(changes_file)
+    ids = read_file(changes_file)["add_song_to_playlist"]
+    return if ids.empty?
+    playlist_id, song_id = ids["playlist_id"], ids["song_id"]
+    @playlist_store
+      .find { |playlist| playlist["id"] == playlist_id }
+      .dig("song_ids").push(song_id)
   end
 
   private def new_id(hash)

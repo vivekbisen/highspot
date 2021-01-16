@@ -45,7 +45,7 @@ test_songs_hash
 
 def test_add_playlist
   playlist_sizes = @mixtape.playlists.size
-  @mixtape.add_playlist("new_playlist.json")
+  @mixtape.add_playlist("changes.json")
   assert @mixtape.playlists.size == playlist_sizes + 1
   new_playlist = @mixtape.playlists.last
   assert !!new_playlist.id
@@ -61,3 +61,21 @@ def test_add_playlist
   assert second_song.title == "Mistakes"
 end
 test_add_playlist
+
+def test_remove_playlists
+  playlist_sizes = @mixtape.playlists.size
+  @mixtape.remove_playlists("changes.json")
+  assert @mixtape.playlists.size == playlist_sizes - 2
+end
+test_remove_playlists
+
+def test_add_existing_song_to_existing_playlist
+  playlist = @mixtape.playlists.find { |pl| pl.id == "2" }
+  song_count = playlist.songs.count
+  assert playlist.songs.last.id != "16"
+  @mixtape.add_existing_song_to_existing_playlist("changes.json")
+  playlist = @mixtape.playlists.find { |pl| pl.id == "2" }
+  assert playlist.songs.count == song_count + 1
+  assert playlist.songs.last.id == "16"
+end
+test_add_existing_song_to_existing_playlist
