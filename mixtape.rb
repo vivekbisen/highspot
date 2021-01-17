@@ -4,6 +4,10 @@ require "json"
 class Mixtape
   def initialize(mixtape = "")
     @mixtape = read_file(mixtape)
+    # Currently, these are being saved in memory for easy access.
+    # To implement persistence here, we could alter the json file
+    # when the three actions (add, remove, update) are operated.
+    # Writing to mixtape.json will persist the changes.
     @user_store = @mixtape.dig("users")
     @song_store = @mixtape.dig("songs")
     @playlist_store = @mixtape.dig("playlists")
